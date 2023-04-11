@@ -5,11 +5,11 @@ const Info = () => {
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
 
-  // useEffect의 두번째 인자 값을 []로 표시하면
-  // 컴포넌트가 처음 마운트 될 때만 실행한다.
+  // useEffect의 두번째 인자 값을 [name]로 표시하면
+  // state의 name 값이 변경될 때마다 실행한다.
   useEffect(() => {
-    console.log("마운트 될 때만 실행합니다.");
-  }, []);
+    console.log(name, nickname);
+  }, [name, nickname]);
 
   const onChangeName = (e) => {
     // e.target.value는 input박스의 내용을
