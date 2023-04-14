@@ -1,17 +1,8 @@
 // App.js
-import { useState } from 'react';
-import Timer from './component/Timer';
+import Info1 from './Info1';
 
 const App = () => {
-  // showTimer = false
-  const [showTimer, setShowTimer] = useState(false);
-
-  return (
-    <div>
-      {showTimer && <Timer />}
-      <button onClick={() => { setShowTimer(!showTimer) }}>Toggle</button>
-    </div>
-  );
+  return <Info1 />
 };
 
 export default App;
