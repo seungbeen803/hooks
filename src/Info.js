@@ -3,12 +3,21 @@ import { useState, useEffect } from 'react';
 
 const Info = () => {
   const [name, setName] = useState('');
+  // 컴포넌트가 처음 마운트 될때 2번 렌더링(브라우저 실행)이 발생한다.
+  // state(name 또는 nickname)값이 변경될때마다 렌더링이 발생한다
+  // useEffect의 두번째 인자값을 []로 표시하면
+  // 컴포넌트가 처음 마운트 될때만 실행한다
   const [nickname, setNickname] = useState('');
 
   // useEffect의 두번째 인자 값을 [name]로 표시하면
   // state의 name 값이 변경될 때마다 실행한다.
   useEffect(() => {
+    console.log("effect");
     console.log(name, nickname);
+    return () => {
+      console.log('cleanup');
+      console.log(name, nickname);
+    }
   }, [name, nickname]);
 
   const onChangeName = (e) => {
