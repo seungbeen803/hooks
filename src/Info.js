@@ -13,12 +13,11 @@ const Info = () => {
   // state의 name 값이 변경될 때마다 실행한다.
   useEffect(() => {
     console.log("effect");
-    console.log(name, nickname);
     return () => {
-      console.log('cleanup');
-      console.log(name, nickname);
+      console.log('unmount');
     }
-  }, [name, nickname]);
+  }, []); // 2번째 인자를 값이 없는 배열로 표현하면 언마운트 될 때
+  // return() 메서드가 호출된다
 
   const onChangeName = (e) => {
     // e.target.value는 input박스의 내용을
