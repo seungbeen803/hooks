@@ -14,6 +14,9 @@ const easyCalculate = (number) => {
   return number + 1;
 };
 
+// state변수가 업데이트 될 경우 App() 컴포넌트는 처음부터 다시 렌더링이
+// 발생되기 때문에 easyCalculate()함수를 호출하여도 자동적으로
+// hardCalculate()함수도 호출되기 때문에 시간이 지연된다.
 const App = () => {
   // hardNumber = 1
   // const [hardNumber, setHardNumber] = useState(1);
