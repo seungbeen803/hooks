@@ -1,65 +1,44 @@
 // App.js
-import { useMemo, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 
-const hardCalculate = (number) => {
-  console.log('시간이 많이 걸리는 계산');
-  for(let i = 0; i < 999999999; i++) {} // 1초 정도 지연
-  return number + 10000;
-};
-
-const easyCalculate = (number) => {
-  console.log('시간이 적게 걸리는 계산');
-  console.log('짱 시간이 짧게 걸리는 계산');
-  for(let i = 0; i < 999999999; i++) {} // 1초 정도 지연
-  return number + 1;
-};
-
-// easyNumber state변수가 업데이트 될 경우
-// App() 컴포넌트는 처음부터 다시 렌더링이
-// 발생되기 때문에 easyCalculate()함수를 호출하여도 자동적으로
-// hardCalculate()함수도 호출되기 때문에 시간이 지연된다.
 const App = () => {
-  // hardNumber = 1
-  const [hardNumber, setHardNumber] = useState(1);
-  // easyNumber = 1
-  const [easyNumber, setEasyNumber] = useState(1);
+  const [number, setNumber] = useState(0);
+  const [isKorea, setIsKorea] = useState(true);
 
-  // const hardSum = hardCalculate(hardNumber);
+  // 기본 데이터 타입
+  // const location = isKorea ? "한국" : "외국";
+  const location = useMemo(() => { // 객체타입
+    return {
+    country: isKorea ? "한국" : "외국",
+    };
+    }, [isKorea]);
 
-  // hardCalculate()함수는 처음 렌더링할 때 호출이 된다.
-  // 메모이제이션을 하게 되면 [hardNumber]은 hardNumber값이
-  // 변경되지 않으면 hardCalculate()함수는 호출이 되지 않는다.
-  const hardSum = useMemo(() => {
-    return hardCalculate(hardNumber);
-  }, [hardNumber]);
-
-  const easySum = easyCalculate(easyNumber);
+  useEffect( () => {
+    console.log("useEeffect 호출");
+    // location이 변경될 때 렌더링이 발생하면서 useEffect가 실행
+    // number 값이 변결될 때는 렌더링이 발생하지 않았음.
+    // location이 객체 타입일 때는 렌더링이 될때마다 새롭게
+    // 객체가 생성되므로 location에는 주소 값이 저장되는데 렌더링이 될 때마다
+    // 다른 주소 값을 가지게 되므로 useEffect에서는 location이 변경되었다고 인식
+    // number 값을 변경해도 렌더링이 발생한다.
+    // location이 기본 데이터 타입일때는 location 값이
+    // 변경되지 않음면 useEffect 실행(렌더링)되지 않는다.
+  }, [location]);
 
   return (
-    <>
-      <div>
-        <h3>시간이 많이 걸리는 계산</h3>
-        <input
-        type="number"
-        value={hardNumber}
-        // parseInt(e.target.value)는 정수 값으로 변환
-        onChange={(e) => { setHardNumber(parseInt(e.target.value))}}
-        />
-        <span>+10000={hardSum}</span>
-      </div>
-
-      <div>
-        <h3>시간이 적게 걸리는 계산</h3>
-        <input
-        type="number"
-        value={easyNumber}
-        // parseInt(e.target.value)는 정수 값으로 변환
-        onChange={(e) => { setEasyNumber(parseInt(e.target.value))}}
-        />
-        <span>+1={easySum}</span>
-      </div>
-    </>
-    
+    <div>
+      <h2>하루 몇 끼 먹어요?</h2>
+      <input
+      type="number"
+      value={number}
+      onChange={(e) => { setNumber(e.target.value) }}
+      />
+      <hr/>
+      <h2>어느 나라에 있어요?</h2>
+      {/* <p>skfk:{location}</p> */}
+      <p>나라: {location.country}</p>
+      <button onClick={() => { setIsKorea(!isKorea) }}>비행기 타자!</button>
+    </div>
   );
 };
 
