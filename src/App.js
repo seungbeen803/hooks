@@ -7,10 +7,14 @@ const App = () => {
   const someFunction = useCallback(() => {
     console.log(`someFunc: number: ${number}`);
     return;
-  }, []);
+  }, [number]);
+  // useCallback의 두 번째 파라미터인 []안에 값이 없을 경우
   // someFunction을 useCallback으로 감싸주면 처음 렌더링이 될 때에
   // number에 0이 저장된 상태에서 메모리에 저장이 되기 때문에
   // Call someFunc 버튼을 누르면 계속해서 0이 출력된다.
+
+  // useCallback의 두 번째 파라미터인 [number]에는 number값이 변경될 때마다
+  // 함수를 호출하는데 변경된 number값이 출력된다.
 
   // const someFunction = () => {
   //   console.log(`someFunc: number: ${number}`);
