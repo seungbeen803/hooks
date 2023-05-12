@@ -1,11 +1,6 @@
 import { useInput } from "./useInput";
-
-function displayMessage(message) {
-  alert(message);
-}
-
 const App = () => {
-  const [inputValue, handleChange] = useInput("", displayMessage);
+  const [inputValue, handleChange] = useInput("안녕");
   const handleSubmit = () => {
     alert(inputValue);
     //setInputValue("");

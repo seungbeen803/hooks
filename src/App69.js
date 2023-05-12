@@ -1,15 +1,7 @@
+// App.js
 import { useInput } from "./useInput";
-
-function displayMessage(message) {
-  alert(message);
-}
-
 const App = () => {
-  const [inputValue, handleChange] = useInput("", displayMessage);
-  const handleSubmit = () => {
-    alert(inputValue);
-    //setInputValue("");
-  };
+  const [inputValue, handleChange, handleSubmit] = useInput();
   return (
     <div>
       <h1>useInput</h1>
