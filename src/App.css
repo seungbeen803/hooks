@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+/* .App안에 있는 .logo */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,6 +14,7 @@
   }
 }
 
+/* .App안에 들어 있는 header태그 */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
